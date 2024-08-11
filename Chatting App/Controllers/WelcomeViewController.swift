@@ -7,7 +7,10 @@
 //
 
 import UIKit
+import SwiftUI
+import FirebaseCore
 import CLTypingLabel
+import Firebase
 
 
 class WelcomeViewController: UIViewController {
@@ -19,6 +22,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeButtonsAndView()
+        FirebaseApp.configure()
     }
     
     

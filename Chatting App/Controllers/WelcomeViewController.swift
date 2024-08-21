@@ -22,7 +22,6 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeButtonsAndView()
-        FirebaseApp.configure()
     }
     
     
@@ -56,8 +55,7 @@ class WelcomeViewController: UIViewController {
         //titleLabel.textColor = .white
         
         // Title Animation with the use of the timer
-        titleLabel.text = "⚡️FlashChat"
-        
+        titleLabel.text = Constants.appName
         
     }
 

@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
                     print(e)
                 }
                 else{
-                    self?.performSegue(withIdentifier: "LoginToChat", sender: self)
+                    self?.performSegue(withIdentifier: Constants.loginsegue, sender: self)
                 }
                 guard self != nil else { return }
                 

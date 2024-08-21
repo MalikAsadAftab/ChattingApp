@@ -26,6 +26,10 @@
 		0CDD06F42C68C2500040D241 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 0CDD06F32C68C2500040D241 /* FirebasePerformance */; };
 		0CDD06F62C68C2500040D241 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 0CDD06F52C68C2500040D241 /* FirebaseRemoteConfig */; };
 		0CDD06F82C68C2500040D241 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0CDD06F72C68C2500040D241 /* FirebaseStorage */; };
+		0CDD070D2C6956CC0040D241 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD070C2C6956CC0040D241 /* Constants.swift */; };
+		0CDD070F2C7101CA0040D241 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD070E2C7101CA0040D241 /* Message.swift */; };
+		0CDD07122C710D110040D241 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CDD07112C710D110040D241 /* MessageCell.xib */; };
+		0CDD07132C710D110040D241 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD07102C710D110040D241 /* MessageCell.swift */; };
 		7B8CA72736BCF4B516E3DC80 /* Pods_Chatting_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C67582111A8FA70EBEF27A /* Pods_Chatting_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +46,10 @@
 		0B62818E235DF01000E35CAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0B628190235DF01B00E35CAF /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0CDD06E42C68C1FC0040D241 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0CDD070C2C6956CC0040D241 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0CDD070E2C7101CA0040D241 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Message.swift; path = "Chatting App/Message.swift"; sourceTree = SOURCE_ROOT; };
+		0CDD07102C710D110040D241 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		0CDD07112C710D110040D241 /* MessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		29C67582111A8FA70EBEF27A /* Pods_Chatting_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatting_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD4E4D7DCF78530EA362301 /* Pods-Chatting App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatting App.release.xcconfig"; path = "Target Support Files/Pods-Chatting App/Pods-Chatting App.release.xcconfig"; sourceTree = "<group>"; };
 		58C253F0DF11C6FC94F8F8FD /* Pods-Chatting App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatting App.debug.xcconfig"; path = "Target Support Files/Pods-Chatting App/Pods-Chatting App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +106,7 @@
 				0B628181235DEE8400E35CAF /* LaunchScreen.storyboard */,
 				0CDD06E42C68C1FC0040D241 /* GoogleService-Info.plist */,
 				0B628184235DEE8400E35CAF /* Info.plist */,
+				0CDD070C2C6956CC0040D241 /* Constants.swift */,
 			);
 			path = "Chatting App";
 			sourceTree = "<group>";
@@ -117,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				0B62817C235DEE8100E35CAF /* Main.storyboard */,
+				0CDD07102C710D110040D241 /* MessageCell.swift */,
+				0CDD07112C710D110040D241 /* MessageCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,6 +135,7 @@
 		0B628194235DF03A00E35CAF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0CDD070E2C7101CA0040D241 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CDD07122C710D110040D241 /* MessageCell.xib in Resources */,
 				0B628183235DEE8400E35CAF /* LaunchScreen.storyboard in Resources */,
 				0CDD06E52C68C1FC0040D241 /* GoogleService-Info.plist in Resources */,
 				0B628180235DEE8400E35CAF /* Assets.xcassets in Resources */,
@@ -280,8 +293,11 @@
 				0B628177235DEE8100E35CAF /* AppDelegate.swift in Sources */,
 				0B628179235DEE8100E35CAF /* SceneDelegate.swift in Sources */,
 				0B62818F235DF01000E35CAF /* LoginViewController.swift in Sources */,
+				0CDD070D2C6956CC0040D241 /* Constants.swift in Sources */,
+				0CDD070F2C7101CA0040D241 /* Message.swift in Sources */,
 				0B628191235DF01B00E35CAF /* ChatViewController.swift in Sources */,
 				0B62818D235DF00B00E35CAF /* RegisterViewController.swift in Sources */,
+				0CDD07132C710D110040D241 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,9 +1,10 @@
 //
-//  ChatViewController.swift
-//  Flash Chat iOS13
+//  MessageCell.swift
+//  Chatting App
 //
-//  Created by Angela Yu on 21/10/2019.
-//  Copyright © 2019 Angela Yu. All rights reserved.
+//  Created by Asad Aftab on 8/17/24.
+//  Copyright © 2024 Asad Aftab. All rights reserved.
+//
 //
 
 import UIKit
@@ -15,7 +16,9 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextfield: UITextField!
     @IBOutlet weak var messageTextfieldBottomConstraint: NSLayoutConstraint! // Link this to the bottom constraint of the textfield
-
+    @IBOutlet weak var sendButton: UIButton!
+    
+    
     let db = Firestore.firestore()
     var messages: [Message] = []
 
@@ -25,9 +28,10 @@ class ChatViewController: UIViewController {
         tableView.dataSource = self
         navigationItem.hidesBackButton = true
         tableView.register(UINib(nibName: Constants.cellNibName, bundle: nil), forCellReuseIdentifier: Constants.cellIdentifier)
-        
+        sendButton.isEnabled = false
         // Load messages
         loadMessages()
+        messageTextfield.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
 
         // Set up keyboard observers
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -48,6 +52,16 @@ class ChatViewController: UIViewController {
             scrollToBottom()
         }
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+            // Enable or disable the button based on whether the text field is empty
+            if let text = textField.text, !text.isEmpty {
+                sendButton.isEnabled = true
+            } else {
+                sendButton.isEnabled = false
+            }
+        }
+
 
     @objc func keyboardWillHide(notification: NSNotification) {
         UIView.animate(withDuration: 0.3) {
@@ -78,7 +92,9 @@ class ChatViewController: UIViewController {
                                 
                                 DispatchQueue.main.async {
                                     self.tableView.reloadData()
-                                    self.scrollToBottom()
+                                    let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                                    //self.scrollToBottom()
                                 }
                             }
                         }
@@ -89,19 +105,20 @@ class ChatViewController: UIViewController {
 
     @IBAction func sendPressed(_ sender: UIButton) {
         if let messageBody = messageTextfield.text, let messageSender = Auth.auth().currentUser?.email {
-            db.collection(Constants.FStore.collectionName).addDocument(data: [
-                Constants.FStore.senderField: messageSender,
-                Constants.FStore.bodyField: messageBody,
-                Constants.FStore.dateField: Date().timeIntervalSince1970
-            ]) { error in
-                if let error = error {
-                    print("There was an issue storing data: \(error)")
-                } else {
-                    print("Successfully saved data!")
-                    self.messageTextfield.text = ""
-                    self.scrollToBottom()
-                }
-            }
+                    db.collection(Constants.FStore.collectionName).addDocument(data: [
+                        Constants.FStore.senderField: messageSender,
+                        Constants.FStore.bodyField: messageBody,
+                        Constants.FStore.dateField: Date().timeIntervalSince1970
+                    ]) { error in
+                        if let error = error {
+                            print("There was an issue storing data: \(error)")
+                        } else {
+                            print("Successfully saved data!")
+                            self.messageTextfield.text = ""
+                            self.textFieldDidChange(self.messageTextfield) // Re-check the text field to disable the button
+                            self.scrollToBottom()
+                        }
+                    }
         }
     }
 
@@ -132,8 +149,27 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = messages[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as! MessageCell
-        cell.label.text = messages[indexPath.row].body
+        cell.label.text = message.body
+        
+        
+        // Message from current user
+        if message.sender == Auth.auth().currentUser?.email{
+            cell.leftImageView.isHidden = true
+            cell.rightImageView.isHidden = false
+            cell.messageBubble.backgroundColor = UIColor(named: Constants.BrandColors.blue)
+            cell.label.textColor = UIColor(named: Constants.BrandColors.lighBlue)
+        }
+        else{
+            cell.leftImageView.isHidden = false
+            cell.rightImageView.isHidden = true
+            cell.messageBubble.backgroundColor = UIColor(named: Constants.BrandColors.lighBlue)
+            cell.label.textColor = UIColor(named: Constants.BrandColors.blue)
+        }
+        
         return cell
     }
+    
 }
